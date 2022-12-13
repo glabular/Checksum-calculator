@@ -18,7 +18,7 @@ namespace HashsumCalculator
 
         internal static string ByteArrayToString(byte[] array)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
 
             for (int i = 0; i < array.Length; i++)
             {

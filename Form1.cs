@@ -130,8 +130,7 @@ namespace HashsumCalculator
             Activate(); // Фокус на окно.
             string[] file = (string[])e.Data.GetData(DataFormats.FileDrop);
             var filePath = file[0].ToString();
-            _fileName = Path.GetFileName(filePath);
-            groupBox2.Text = $"Чек-суммы файла {_fileName}:";
+            groupBox2.Text = $"Чек-суммы файла {Path.GetFileName(filePath)}:"; // Имя файла в интерфейсе
 
             ChecksumSHA256 = string.Empty;
             ChecksumSHA384 = string.Empty;
@@ -139,30 +138,7 @@ namespace HashsumCalculator
             ChecksumSHA1 = string.Empty;
             ChecksumMD5 = string.Empty;
 
-            if (checkBoxSHA1.Checked)
-            {
-                ActivateProgressBar(progressBarSHA1);
-            }
-
-            if (checkBoxSHA256.Checked)
-            {
-                ActivateProgressBar(progressBarSHA256);
-            }
-
-            if (checkBoxSHA384.Checked)
-            {
-                ActivateProgressBar(progressBarSHA384);
-            }
-
-            if (checkBoxSHA512.Checked)
-            {
-                ActivateProgressBar(progressBarSHA512);
-            }
-
-            if (checkBoxMD5.Checked)
-            {
-                ActivateProgressBar(progressBarMD5);
-            }
+            ActivateNeededProgressBars();
 
             var sw = new Stopwatch();
                          
@@ -334,13 +310,43 @@ namespace HashsumCalculator
             EnableAllCheckboxes();
             GC.Collect();
 
+            
+        }
+
+        private void ActivateNeededProgressBars()
+        {
+            if (checkBoxSHA1.Checked)
+            {
+                ActivateProgressBar(progressBarSHA1);
+            }
+
+            if (checkBoxSHA256.Checked)
+            {
+                ActivateProgressBar(progressBarSHA256);
+            }
+
+            if (checkBoxSHA384.Checked)
+            {
+                ActivateProgressBar(progressBarSHA384);
+            }
+
+            if (checkBoxSHA512.Checked)
+            {
+                ActivateProgressBar(progressBarSHA512);
+            }
+
+            if (checkBoxMD5.Checked)
+            {
+                ActivateProgressBar(progressBarMD5);
+            }
+
             static void ActivateProgressBar(ProgressBar progressBar)
             {
                 progressBar.Visible = true;
                 progressBar.Style = ProgressBarStyle.Marquee;
                 progressBar.MarqueeAnimationSpeed = 10;
             }
-        }        
+        }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
@@ -480,12 +486,6 @@ namespace HashsumCalculator
         private void checkBoxStopWatch_CheckedChanged(object sender, EventArgs e)
         {
             CommonInfo.EnableStopwatch = checkBoxStopWatch.Checked;
-        }
-
-        private void checkBoxMD5_CheckedChanged(object sender, EventArgs e)
-        {
-            DisableAllCheckboxes();
-            checkBoxEatRAM.Enabled = false;
-        }
+        }        
     }
 }

@@ -174,7 +174,6 @@
             this.checkBoxMD5.TabIndex = 10;
             this.checkBoxMD5.Text = "MD5";
             this.checkBoxMD5.UseVisualStyleBackColor = true;
-            this.checkBoxMD5.CheckedChanged += new System.EventHandler(this.checkBoxMD5_CheckedChanged);
             // 
             // textBoxSHA384
             // 
